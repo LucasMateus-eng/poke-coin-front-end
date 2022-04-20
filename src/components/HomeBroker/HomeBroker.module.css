@@ -1,0 +1,45 @@
+/* homebroker */
+.homebroker {
+	height: 100vh;
+	padding: 3rem 4%;
+
+	display: grid;
+	grid-template:
+		"nav" auto
+		"homebroker" 1fr;
+	background-color: var(--color-primary);
+}
+
+/* homebroker-nav */
+.homebroker-nav {
+	grid-area: "nav";
+	justify-self: start;
+}
+
+.icon-nav {
+	color: var(--color-secondary);
+}
+
+/* homebroker-form */
+.homebroker-form {
+	grid-area: "homebroker";
+	justify-self: center;
+	align-self: center;
+
+	width: 35%;
+	padding: 3rem 2rem;
+	background-color: var(--color-secondary);
+}
+
+/* responsiveness */
+@media screen and (max-width: 960px) {
+	.homebroker-form {
+		width: 70%;
+	}
+}
+
+@media screen and (max-width: 690px) {
+	.homebroker-form {
+		width: 90%;
+	}
+}

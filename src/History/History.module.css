@@ -1,0 +1,88 @@
+/* history */
+.history {
+	min-height: 100vh;
+	padding: 3rem 4%;
+
+	display: grid;
+	grid-template:
+		"nav" 100px
+		"header" 100px
+		"content" auto;
+	background-color: var(--color-primary);
+}
+
+/* history-nav */
+.history-nav {
+	grid-area: "nav";
+	justify-self: start;
+	margin-bottom: 1rem;
+}
+
+.icon-nav {
+	color: var(--color-secondary);
+}
+
+/* history-header */
+.history-header {
+	grid-area: "header";
+	margin-bottom: 3rem;
+}
+
+.history-header h2 {
+	font-size: 3rem;
+	color: var(--color-secondary);
+	text-align: left;
+}
+
+/* history-content */
+.history-content {
+	grid-area: "content";
+	width: 100%;
+
+	display: flex;
+	flex-direction: column;
+}
+
+.history-content h3 {
+	font-size: 3rem;
+	color: var(--color-secondary);
+	text-align: center;
+}
+
+/* history-card */
+.history-card {
+	padding: 2rem;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: var(--color-secondary);
+
+	font-size: 1.8rem;
+	color: var(--color-primary);
+
+	border-radius: var(--card-default-radius);
+	margin-bottom: 2rem;
+}
+
+.history-card:last-child {
+	margin-bottom: 0;
+}
+
+/* history-info */
+.history-info {
+	display: flex;
+	align-items: center;
+}
+
+/* responsiveness */
+
+@media screen and (max-width: 790px) {
+	.history-card {
+		flex-direction: column;
+	}
+
+	.history-card div {
+		margin-bottom: 1rem;
+	}
+}

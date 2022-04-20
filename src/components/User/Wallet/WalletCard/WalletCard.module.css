@@ -1,0 +1,81 @@
+/* poke-coin */
+.poke-coin {
+	padding: 2rem;
+	background-color: var(--color-secondary);
+	border-radius: var(--card-default-radius);
+}
+
+/* poke-coin-name */
+.poke-coin-name {
+	margin-bottom: 4rem;
+}
+
+.poke-coin-name h2 {
+	font-size: 3rem;
+	text-align: center;
+	color: var(--color-dark-gray);
+}
+
+/* poke-coin-info */
+.poke-coin-info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+/* poke-coin-character */
+.poke-coin-character p {
+	font-size: 1.8rem;
+	color: var(--color-primary);
+	margin-bottom: 1rem;
+}
+
+.poke-coin-character p:last-child {
+	margin-bottom: 0;
+}
+
+/* poke-coin-value */
+.poke-coin-value {
+	width: 35%;
+	padding: 0.8rem;
+	color: var(--color-secondary);
+	background-color: var(--color-primary);
+	border-radius: var(--card-middle-radius);
+}
+
+.poke-coin-value p {
+	font-size: 2rem;
+	text-align: center;
+}
+
+/* responsiveness */
+@media screen and (max-width: 550px) {
+	.poke-coin {
+		padding: 1rem;
+	}
+
+	.poke-coin-name {
+		margin-bottom: 2rem;
+	}
+
+	.poke-coin-name h2 {
+		font-size: 2rem;
+	}
+
+	.poke-coin-info {
+		flex-direction: column;
+	}
+
+	.poke-coin-character {
+		margin-bottom: 1rem;
+	}
+
+	.poke-coin-character p {
+		font-size: 1.8rem;
+		text-align: center;
+	}
+
+	.poke-coin-value {
+		width: 80%;
+	}
+}

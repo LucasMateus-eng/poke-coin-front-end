@@ -1,0 +1,6 @@
+.wrapper-home {
+	display: grid;
+	grid-template:
+		"header" auto
+		"content" 1fr;
+}

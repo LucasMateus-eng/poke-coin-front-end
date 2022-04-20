@@ -1,0 +1,58 @@
+/* register */
+.register {
+	height: 100vh;
+
+	display: grid;
+	grid-template-columns: repeat(2, minmax(auto, 1fr));
+}
+
+/* register-form */
+.register-form {
+	width: 100%;
+	padding: 3rem 4%;
+
+	display: grid;
+	grid-template:
+		"nav" auto
+		"form" 1fr;
+	background-color: var(--color-primary);
+}
+
+/* login-nav */
+.login-nav {
+	grid-area: "nav";
+	justify-self: start;
+}
+
+.icon-nav {
+	color: var(--color-secondary);
+}
+
+/* register-cover */
+.register-cover {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--color-secondary);
+	padding: 3rem 4%;
+}
+
+/* register-image */
+.register-image {
+	max-width: 300px;
+}
+
+.register-image img {
+	width: 100%;
+}
+
+/* responsiveness */
+@media screen and (max-width: 860px) {
+	.register {
+		grid-template-columns: 1fr;
+	}
+
+	.register-cover {
+		display: none;
+	}
+}

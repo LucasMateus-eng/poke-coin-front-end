@@ -1,0 +1,94 @@
+/* login */
+.login {
+	height: 100vh;
+
+	display: grid;
+	grid-template-columns: repeat(2, minmax(auto, 1fr));
+}
+
+/* login-cover */
+.login-cover {
+	padding: 3rem 4%;
+
+	display: grid;
+	grid-template:
+		"nav" auto
+		"cover" 1fr;
+	background-color: var(--color-primary);
+}
+
+/* login-nav */
+.login-nav {
+	grid-area: "nav";
+	justify-self: start;
+}
+
+.icon-nav {
+	color: var(--color-secondary);
+}
+
+/* login-image-cover */
+.login-image-cover {
+	grid-area: "cover";
+	justify-self: center;
+	align-self: center;
+}
+
+/* login-image */
+.login-image {
+	max-width: 300px;
+}
+
+.login-image img {
+	width: 100%;
+}
+
+/* login-form */
+.login-form {
+	width: 100%;
+	padding: 3rem 4%;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	background-color: var(--color-secondary);
+}
+
+/* login-form-nav */
+.login-form-nav {
+	display: none;
+}
+
+.icon-form {
+	color: var(--color-primary);
+}
+
+/* responsiveness */
+@media screen and (max-width: 860px) {
+	.login {
+		grid-template-columns: 1fr;
+	}
+
+	.login-cover {
+		display: none;
+	}
+
+	.login-form {
+		flex-direction: inherit;
+		align-items: inherit;
+		justify-content: inherit;
+
+		display: grid;
+		grid-template:
+			"nav" auto
+			"form" 1fr;
+	}
+
+	.login-form-nav {
+		display: block;
+		grid-area: "nav";
+		justify-self: start;
+	}
+}

@@ -1,0 +1,124 @@
+/*  user-wrapper */
+.user-wrapper {
+	min-height: 100vh;
+	display: grid;
+	grid-template:
+		"header" auto
+		"info" auto
+		"wallet" auto;
+
+	padding: 3rem 4%;
+}
+
+/* user-header */
+.user-header {
+	grid-area: "header";
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	margin-bottom: 10rem;
+}
+
+/* brand */
+.brand h1 {
+	font-size: 5rem;
+	color: var(--color-light-gray);
+}
+
+/* menu */
+.menu-list {
+	display: flex;
+	align-items: center;
+}
+
+/* link */
+.link {
+	width: 200px;
+	padding: 0 1.25rem;
+
+	font-size: 2rem;
+	color: var(--color-light-gray);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	cursor: pointer;
+}
+
+.link:hover {
+	text-decoration: underline;
+}
+
+/* user-info-deposit */
+.user-info-deposit {
+	grid-area: "info";
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	margin-bottom: 5rem;
+}
+
+/* user-history */
+.user-history h2 {
+	font-size: 3.5rem;
+	color: var(--color-primary);
+	margin-bottom: 1.25rem;
+}
+
+/* link-history */
+.link-history {
+	font-size: 2rem;
+	color: var(--color-dark-gray);
+
+	cursor: pointer;
+}
+
+.link-history:hover {
+	text-decoration: underline;
+}
+
+/* responsiveness */
+@media screen and (max-width: 730px) {
+	.user-info-deposit {
+		display: block;
+	}
+}
+
+@media screen and (max-width: 550px) {
+	.user-wrapper {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.user-header {
+		display: block;
+	}
+
+	.brand {
+		margin-bottom: 1rem;
+	}
+
+	.user-info-deposit {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.user-history h2 {
+		font-size: 3rem;
+		text-align: center;
+	}
+
+	.user-wallet {
+		width: 80%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+}

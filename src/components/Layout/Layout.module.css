@@ -1,0 +1,78 @@
+:root {
+	/* typography */
+	font-family: "Basic", sans-serif;
+	font-size: 10px;
+	color: var(--color-dark-gray);
+
+	/* colors */
+	--color-primary: #003492;
+	--color-secondary: #f3f6fc;
+	--color-light-gray: #8c8a97;
+	--color-dark-gray: #33303e;
+
+	/* measurements */
+	--btn-default-radius: 0.8rem;
+	--btn-small-radius: 0.2rem;
+	--input-default-radius: 0.5rem;
+	--card-default-radius: 0.8rem;
+	--card-middle-radius: 1rem;
+	--card-large-radius: 1.5rem;
+}
+
+/* css reset */
+*,
+::after,
+::before {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/* css global */
+html {
+	height: -webkit-fill-available;
+}
+
+body {
+	width: 100%;
+	min-height: 100vh;
+	height: -webkit-fill-available;
+}
+
+ul {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+input,
+select {
+	outline: none;
+}
+
+select {
+	font-family: "Basic", sans-serif;
+}
+
+label {
+	display: block;
+}
+
+input::placeholder,
+button {
+	font-family: "Basic", sans-serif;
+}
+
+/* wrapper */
+.wrapper {
+	min-height: 100vh;
+	height: -webkit-fill-available;
+}
+
+@media screen and (max-width: 768px) {
+	.wrapper {
+		overflow-y: scroll;
+	}
+}

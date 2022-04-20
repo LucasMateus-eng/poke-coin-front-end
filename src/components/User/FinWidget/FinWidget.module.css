@@ -1,0 +1,99 @@
+/* user-operations */
+.user-operations {
+	width: 50%;
+	padding: 2rem;
+
+	display: grid;
+	grid-template: "info fin-action";
+
+	background-color: var(--color-primary);
+	color: var(--color-secondary);
+}
+
+/* user-financial-info */
+.user-financial-info {
+	grid-area: "info";
+}
+
+.user-financial-info p {
+	font-size: 2rem;
+	margin-bottom: 1.25rem;
+}
+
+.user-financial-info p:last-child {
+	margin-bottom: 0;
+}
+
+/* user-deposit */
+.user-deposit {
+	grid-area: "fin-action";
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.user-deposit label {
+	font-size: 1.8rem;
+}
+
+.user-deposit input {
+	width: 30%;
+	padding: 0.8rem;
+	border: none;
+	border-radius: var(--btn-small-radius);
+	margin: 0 0.8rem;
+}
+
+.user-deposit button {
+	width: 35%;
+	padding: 0.5rem;
+	border: none;
+	border-radius: var(--btn-small-radius);
+
+	font-size: 1.8rem;
+	color: var(--color-secondary);
+	background-color: var(--color-light-gray);
+}
+
+/* responsiveness */
+@media screen and (max-width: 960px) {
+	.user-operations {
+		width: 60%;
+	}
+}
+
+@media screen and (max-width: 730px) {
+	.user-operations {
+		margin-top: 3rem;
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 550px) {
+	.user-operations {
+		width: 80%;
+		grid-template:
+			"info"
+			"fin-action";
+
+		padding: 2rem;
+	}
+
+	.user-financial-info {
+		margin-bottom: 1rem;
+	}
+
+	.user-financial-info p {
+		font-size: 1.8rem;
+	}
+
+	.user-deposit {
+		justify-content: flex-start;
+	}
+}
+
+@media screen and (max-width: 375px) {
+	.user-deposit button {
+		font-size: 1.5rem;
+	}
+}
