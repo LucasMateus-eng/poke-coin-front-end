@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation, Link } from "react-router-dom";
-import ArrowIcon from "../components/UI/ArrowIcon/ArrowIcon";
+import ArrowIcon from "../UI/ArrowIcon/ArrowIcon";
 import styles from "./History.module.css";
 
 const History = () => {

@@ -5,7 +5,7 @@ import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
 import User from './components/User/User';
 import HomeBroker from "./components/HomeBroker/HomeBroker";
-import History from "./History/History";
+import History from "./components/History/History";
 import RequireAuth from "./components/Auth/RequireAuth";
 
 function App() {

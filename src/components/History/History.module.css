@@ -1,6 +1,7 @@
 /* history */
 .history {
 	min-height: 100vh;
+	height: -webkit-fill-available;
 	padding: 3rem 4%;
 
 	display: grid;
