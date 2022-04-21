@@ -30,7 +30,7 @@
 }
 
 .field-group select {
-	width: 70%;
+	width: 75%;
 	padding: 0.8rem 1.8rem;
 
 	border: none;
@@ -60,6 +60,7 @@
 
 .pokemon h2 {
 	font-size: 2rem;
+	text-align: center;
 	color: var(--color-primary);
 }
 
@@ -80,6 +81,7 @@
 .poke-info p {
 	font-size: 1.5rem;
 	color: var(--color-primary);
+	margin-bottom: 0.8rem;
 }
 
 /* form-action */
@@ -115,5 +117,9 @@
 
 	.pokemon h2 {
 		margin-bottom: 2rem;
+	}
+
+	.field-group select {
+		width: 100%;
 	}
 }

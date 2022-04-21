@@ -17,6 +17,9 @@
 	--card-default-radius: 0.8rem;
 	--card-middle-radius: 1rem;
 	--card-large-radius: 1.5rem;
+
+	/* toastify */
+	--toastify-font-family: "Basic", sans-serif;
 }
 
 /* css reset */
@@ -37,6 +40,7 @@ body {
 	width: 100%;
 	min-height: 100vh;
 	height: -webkit-fill-available;
+	font-size: 1.6rem;
 }
 
 ul {

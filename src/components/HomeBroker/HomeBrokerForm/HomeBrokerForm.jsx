@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Button from "../../UI/Button/Button";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import styles from "./HomeBrokerForm.module.css";
 
@@ -23,61 +24,64 @@ const HomeBrokerForm = () => {
 		img: "",
 	});
 
-	const fetchPokemon = async () => {
-		try {
-			const response = await axios.get(
-				`https://pokeapi.co/api/v2/pokemon/${pokemonName}`
-			);
-
-			console.log(response?.data);
-			const { data } = response;
-
-			setPokemon({
-				name: data.forms[0].name,
-				base_experience: data.base_experience,
-				img: data.sprites.other.dream_world.front_default,
-			});
-		} catch (err) {
-			if (!err?.response) {
-				console.log({ message: "Sem resposta do servidor." });
-			} else {
-				console.log(err?.response.data);
-			}
-		}
-	};
-
-	const fetchCurrencyValue = async () => {
-		try {
-			const key =
-				"0348070a38e6e37a0ca95711878657fdde0842079ccf71d791d2cdefea75c44d";
-
-			const response = await axios.get(
-				`https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD&&api_key={${key}}`
-			);
-
-			setBtcToDollar(response.data.USD);
-			console.log(response.data.USD);
-		} catch (err) {
-			if (!err?.response) {
-				console.log({ message: "Sem resposta do servidor." });
-			} else {
-				console.log(err?.response.data);
-			}
-		}
-	};
-
 	useEffect(() => {
-		const id = setTimeout(() => {
-			fetchPokemon();
+		const id = setTimeout(async () => {
+			try {
+				const response = await axios.get(
+					`https://pokeapi.co/api/v2/pokemon/${pokemonName}`
+				);
+
+				console.log(response?.data);
+				const { data } = response;
+
+				setPokemon({
+					name: data.forms[0].name,
+					base_experience: data.base_experience,
+					img: data.sprites.other.dream_world.front_default,
+				});
+			} catch (err) {
+				if (!err?.response) {
+					console.log({ message: "Sem resposta do servidor." });
+				} else {
+					toast.error("Que pena! Ativo não encontrado.");
+					console.log(err?.response.data);
+				}
+			}
 		}, 600);
 
 		return () => {
+			setPokemon({
+				name: "",
+				base_experience: "",
+				img: "",
+			});
 			clearTimeout(id);
 		};
 	}, [pokemonName]);
 
 	useEffect(() => {
-		fetchCurrencyValue();
+		const id = setTimeout(async () => {
+			try {
+				const key = process.env.REACT_BTC_KEY;
+
+				const response = await axios.get(
+					`https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD&&api_key={${key}}`
+				);
+
+				setBtcToDollar(response.data.USD);
+				console.log(`BTC to dollar: ${response.data.USD}`);
+			} catch (err) {
+				if (!err?.response) {
+					console.log({ message: "Sem resposta do servidor." });
+				} else {
+					console.log(err?.response.data);
+				}
+			}
+		}, 500);
+
+		return () => {
+			clearTimeout(id);
+		};
 	}, [pokemonQuantity]);
 
 	const navigate = useNavigate();
@@ -86,10 +90,20 @@ const HomeBrokerForm = () => {
 		bitcoin.setFiat("usd", btcToDollar);
 		const factor = bitcoin(1, "satoshi").to("usd").value();
 
-		console.log(factor);
+		console.log(`Factor: ${factor}`);
 
 		const totalOperation =
 			pokemon.base_experience * parseInt(pokemonQuantity) * factor;
+
+		if (pokemonName === "") {
+			toast.error("O nome do ativo não pode ser vazio!");
+			return;
+		}
+
+		if (pokemonQuantity === "") {
+			toast.error("A quantidade deve ser maior que zero!");
+			return;
+		}
 
 		const operation = {
 			name: pokemonName,
@@ -99,7 +113,7 @@ const HomeBrokerForm = () => {
 			total: totalOperation,
 		};
 
-		console.log(operation);
+		console.log(`Dados da operação: ${JSON.stringify(operation)}`);
 
 		try {
 			const OPERATION_URL =
@@ -119,19 +133,23 @@ const HomeBrokerForm = () => {
 
 			console.log(JSON.stringify(response?.data));
 
+			toast.success("Operação realizada com sucesso!");
+
 			navigate("/user", { replace: true });
 		} catch (err) {
 			if (!err?.response) {
+				toast.error("Sem resposta do servidor.");
 				console.log({ message: "Sem resposta do servidor." });
 			} else {
+				toast.error(err?.response.data.message);
 				console.log(err?.response.data);
 			}
 		}
 	};
 
-	const notPokemonInfo = <h2>Pesquise um Pokemon</h2>;
+	const withoutPokemonName = <h2>Pesquise um Pokemon</h2>;
 
-	const pokemonInfo = (
+	const withPokemonName = (
 		<>
 			<div className={styles["pokemon-image"]}>
 				<img src={pokemon.img} alt={pokemon.name} />
@@ -181,7 +199,7 @@ const HomeBrokerForm = () => {
 			</form>
 			<div className={styles["cover-action"]}>
 				<div className={styles["pokemon"]}>
-					{pokemon.img === "" ? notPokemonInfo : pokemonInfo}
+					{pokemonName.trim() === "" ? withoutPokemonName : withPokemonName}
 				</div>
 				<div className={styles["form-action"]}>
 					<Button onClick={handleClick}>Enviar ordem</Button>
