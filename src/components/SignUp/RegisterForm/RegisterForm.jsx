@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import mainAxios from "../../../api/mainAxios";
+import { toast } from "react-toastify";
 import Button from "../../UI/Button/Button";
+
+import mainAxios from "../../../api/mainAxios";
+
 import styles from "./RegisterForm.module.css";
 
 const REGISTER_URL = "/auth/register";
@@ -40,11 +43,14 @@ const RegisterForm = (props) => {
 			setEmail("");
 			setPassword("");
 
+			toast.success(response?.data.message);
 			navigate("/login", { replace: true });
 		} catch (err) {
 			if (!err?.response) {
+				toast.error("Sem resposta do servidor.");
 				console.log({ message: "Sem resposta do servidor." });
 			} else {
+				toast.error(err?.response.data.message);
 				console.log(err?.response.data);
 			}
 		}

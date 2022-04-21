@@ -101,7 +101,12 @@ const HomeBrokerForm = () => {
 		}
 
 		if (pokemonQuantity === "") {
-			toast.error("A quantidade deve ser maior que zero!");
+			toast.error("A quantidade não pode ser vazia!");
+			return;
+		}
+
+		if (pokemonQuantity !== " " && typeof pokemonQuantity === "string") {
+			toast.error("A quantidade deve ser um dado numérico!");
 			return;
 		}
 
@@ -133,7 +138,7 @@ const HomeBrokerForm = () => {
 
 			console.log(JSON.stringify(response?.data));
 
-			toast.success("Operação realizada com sucesso!");
+			toast.success(response?.data.message);
 
 			navigate("/user", { replace: true });
 		} catch (err) {

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
 import Button from "../../UI/Button/Button";
+
 import styles from "./LoginForm.module.css";
 
 import mainAxios from "../../../api/mainAxios";
@@ -35,11 +36,15 @@ const LoginForm = () => {
 			setEmail("");
 			setPassword("");
 			localStorage.setItem("token", accessToken);
+
+			toast.success(response?.data.message);
 			navigate("/user", { replace: true });
 		} catch (err) {
 			if (!err?.response) {
+				toast.error("Sem resposta do servidor.");
 				console.log({ message: "Sem resposta do servidor." });
 			} else {
+				toast.error(err?.response.data.message);
 				console.log(err?.response.data);
 			}
 		}
