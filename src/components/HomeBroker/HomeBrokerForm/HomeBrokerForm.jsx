@@ -105,11 +105,6 @@ const HomeBrokerForm = () => {
 			return;
 		}
 
-		if (pokemonQuantity !== " " && typeof pokemonQuantity === "string") {
-			toast.error("A quantidade deve ser um dado numérico!");
-			return;
-		}
-
 		const operation = {
 			name: pokemonName,
 			base_experience: pokemon.base_experience,
