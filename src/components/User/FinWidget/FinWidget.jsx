@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import mainAxios from "../../../api/mainAxios";
+import { toast } from "react-toastify";
 import Card from "../../UI/Card/Card";
 import Button from "../../UI/Button/Button";
+
+import mainAxios from "../../../api/mainAxios";
+import numberFormat from "../../../helpers/numberFormat";
 import styles from "./FinWidget.module.css";
 
 const USER_STATEMENT_VALUE = "/balance";
@@ -13,57 +16,43 @@ const FinWidget = (props) => {
 	const [walletValue, setWalletValue] = useState(0);
 	const [amount, setAmount] = useState("");
 
-	const fetchStatementValue = async () => {
-		try {
-			const access_token = localStorage.getItem("token");
-
-			const response = await mainAxios.get(USER_STATEMENT_VALUE, {
-				headers: {
-					Authorization: `Bearer ${access_token}`,
-				},
-			});
-
-			const { data } = response;
-
-			setStatementValue(data);
-			props.onChangeStatement(data);
-		} catch (err) {
-			if (err.response) {
-				console.log(err.response.data);
-				console.log(err.response.status);
-				console.log(err.response.headers);
-			} else {
-				console.log(`Error: ${err.message}`);
-			}
-		}
-	};
-
-	const fetchWalletValue = async () => {
-		try {
-			const access_token = localStorage.getItem("token");
-
-			const response = await mainAxios.get(USER_WALLET_VALUE, {
-				headers: {
-					Authorization: `Bearer ${access_token}`,
-				},
-			});
-
-			setWalletValue(response?.data);
-		} catch (err) {
-			if (err.response) {
-				console.log(err.response.data);
-				console.log(err.response.status);
-				console.log(err.response.headers);
-			} else {
-				console.log(`Error: ${err.message}`);
-			}
-		}
-	};
-
 	useEffect(() => {
-		fetchStatementValue();
-		fetchWalletValue();
-	}, []);
+		const fetchFinancialData = async () => {
+			try {
+				const access_token = localStorage.getItem("token");
+
+				const [statement, walletValue] = await Promise.all([
+					mainAxios.get(USER_STATEMENT_VALUE, {
+						headers: {
+							Authorization: `Bearer ${access_token}`,
+						},
+					}),
+					mainAxios.get(USER_WALLET_VALUE, {
+						headers: {
+							Authorization: `Bearer ${access_token}`,
+						},
+					}),
+				]);
+
+				console.log(statement);
+				setStatementValue(statement?.data);
+				props.onChangeStatement(statement?.data);
+
+				console.log(walletValue);
+				setWalletValue(walletValue?.data);
+			} catch (err) {
+				if (!err?.response) {
+					toast.error("Sem resposta do servidor.");
+					console.log({ message: "Sem resposta do servidor." });
+				} else {
+					toast.error(err?.response.data.message);
+					console.log(err?.response.data);
+				}
+			}
+		};
+
+		fetchFinancialData();
+	}, [statementValue, walletValue]);
 
 	const handleSubmit = async (e) => {
 		const access_token = localStorage.getItem("token");
@@ -71,9 +60,14 @@ const FinWidget = (props) => {
 		e.preventDefault();
 
 		try {
+			if (amount === "") {
+				toast.error("O depósito não pode ser vazio!");
+				return;
+			}
+
 			const response = await mainAxios.post(
 				USER_STATEMENT,
-				JSON.stringify({ amount }),
+				JSON.stringify({ amount: parseInt(amount) }),
 				{
 					headers: {
 						"Content-type": "application/json",
@@ -83,19 +77,18 @@ const FinWidget = (props) => {
 			);
 
 			console.log(JSON.stringify(response?.data));
-			fetchStatementValue();
+
+			toast.success(response?.data.message);
 			setAmount("");
 		} catch (err) {
 			if (!err?.response) {
+				toast.error("Sem resposta do servidor.");
 				console.log({ message: "Sem resposta do servidor." });
 			} else {
+				toast.error(err?.response.data.message);
 				console.log(err?.response.data);
 			}
 		}
-	};
-
-	const numberFormat = (value) => {
-		return value === 0 ? value : value.toFixed(3);
 	};
 
 	return (

@@ -8,27 +8,6 @@ const WalletCard = ({ item }) => {
 	const [factor, setFactor] = useState(0);
 	const [currentValue, setCurrentValue] = useState(0);
 
-	const fetchCurrentDolar = async () => {
-		try {
-			const key =
-				"0348070a38e6e37a0ca95711878657fdde0842079ccf71d791d2cdefea75c44d";
-
-			const response = await axios.get(
-				`https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD&&api_key={${key}}`
-			);
-
-			setFactor(response.data.USD);
-			updateCurrentValue();
-			console.log(response.data.USD);
-		} catch (err) {
-			if (!err?.response) {
-				console.log({ message: "Sem resposta do servidor." });
-			} else {
-				console.log(err?.response.data);
-			}
-		}
-	};
-
 	const updateCurrentValue = () => {
 		bitcoin.setFiat("usd", factor);
 		const base = bitcoin(1, "satoshi").to("usd").value();
@@ -39,6 +18,27 @@ const WalletCard = ({ item }) => {
 	};
 
 	useEffect(() => {
+		const fetchCurrentDolar = async () => {
+			try {
+				const key = process.env.REACT_BTC_KEY;
+
+				const response = await axios.get(
+					`https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD&&api_key={${key}}`
+				);
+
+				console.log(response.data.USD);
+
+				setFactor(response.data.USD);
+				updateCurrentValue();
+			} catch (err) {
+				if (!err?.response) {
+					console.log({ message: "Sem resposta do servidor." });
+				} else {
+					console.log(err?.response.data);
+				}
+			}
+		};
+
 		fetchCurrentDolar();
 	});
 

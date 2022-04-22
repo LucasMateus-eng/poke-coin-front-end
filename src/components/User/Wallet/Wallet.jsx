@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Card from "../../UI/Card/Card";
 import WalletCard from "./WalletCard/WalletCard";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+
 import mainAxios from "../../../api/mainAxios";
 
 import styles from "./Wallet.module.css";
@@ -11,27 +13,30 @@ const USER_WALLET = "/wallet";
 const Wallet = (props) => {
 	const [wallet, setWallet] = useState([]);
 
-	const fetchWallet = async () => {
-		try {
-			const access_token = localStorage.getItem("token");
-
-			const response = await mainAxios.get(USER_WALLET, {
-				headers: {
-					Authorization: `Bearer ${access_token}`,
-				},
-			});
-			setWallet(response.data);
-			console.log(response.data);
-		} catch (err) {
-			if (!err?.response) {
-				console.log({ message: "Sem resposta do servidor." });
-			} else {
-				console.log(err?.response.data);
-			}
-		}
-	};
-
 	useEffect(() => {
+		const fetchWallet = async () => {
+			try {
+				const access_token = localStorage.getItem("token");
+
+				const response = await mainAxios.get(USER_WALLET, {
+					headers: {
+						Authorization: `Bearer ${access_token}`,
+					},
+				});
+
+				console.log(response.data);
+
+				setWallet(response.data);
+			} catch (err) {
+				if (!err?.response) {
+					toast.error("Sem resposta do servidor.");
+					console.log({ message: "Sem resposta do servidor." });
+				} else {
+					toast.error(err?.response.data.message);
+					console.log(err?.response.data);
+				}
+			}
+		};
 		fetchWallet();
 	}, []);
 
