@@ -56,7 +56,9 @@ const Wallet = (props) => {
 			<Card className={styles["wallet-content"]}>
 				{wallet.length === 0
 					? initialContent
-					: wallet.map((item) => <WalletCard item={item} />)}
+					: React.Children.toArray(
+							wallet.map((item) => <WalletCard item={item} />)
+					  )}
 			</Card>
 			<div className={styles["wallet-action"]}>
 				<nav>

@@ -44,7 +44,7 @@ const WalletCard = ({ item }) => {
 
 	return (
 		<>
-			<div className={styles["poke-coin"]} key={item._id}>
+			<div className={styles["poke-coin"]}>
 				<div className={styles["poke-coin-name"]}>
 					<h2>{item.name}</h2>
 				</div>
