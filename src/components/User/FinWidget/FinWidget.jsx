@@ -107,12 +107,13 @@ const FinWidget = (props) => {
 			<form className={styles["user-deposit"]} onSubmit={handleSubmit}>
 				<label htmlFor="amount">Valor</label>
 				<input
-					type="text"
+					type="number"
 					name="amount"
 					id="amount"
-					onChange={(e) => setAmount(e.target.value)}
-					required
+					min={1}
 					value={amount}
+					required
+					onChange={(e) => setAmount(e.target.value)}
 				/>
 				<Button type="submit">Depositar</Button>
 			</form>

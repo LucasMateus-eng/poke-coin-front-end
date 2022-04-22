@@ -40,7 +40,7 @@
 	padding: 0.8rem;
 	color: var(--color-secondary);
 	background-color: var(--color-primary);
-	border-radius: var(--card-middle-radius);
+	border-radius: var(--card-default-radius);
 }
 
 .poke-coin-value p {
@@ -51,11 +51,11 @@
 /* responsiveness */
 @media screen and (max-width: 550px) {
 	.poke-coin {
-		padding: 1rem;
+		padding: 2.5rem 1.5rem;
 	}
 
 	.poke-coin-name {
-		margin-bottom: 2rem;
+		margin-bottom: 0;
 	}
 
 	.poke-coin-name h2 {
@@ -67,7 +67,7 @@
 	}
 
 	.poke-coin-character {
-		margin-bottom: 1rem;
+		margin: 3rem 0;
 	}
 
 	.poke-coin-character p {

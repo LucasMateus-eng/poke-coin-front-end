@@ -49,13 +49,9 @@ const User = () => {
 					</Link>
 				</div>
 				<nav className={styles.menu}>
-					<ul className={styles["menu-list"]}>
-						<li>
-							<Link to="/" className={styles.link}>
-								Sair
-							</Link>
-						</li>
-					</ul>
+					<Link to="/" className={styles.link}>
+						Sair
+					</Link>
 				</nav>
 			</header>
 			<div className={styles["user-info-deposit"]}>

@@ -90,4 +90,12 @@
 		width: 80%;
 		padding: 3rem 0;
 	}
+
+	.wallet-action .link {
+		width: 70%;
+	}
+
+	.wallet-content {
+		padding: 2rem;
+	}
 }

@@ -72,6 +72,7 @@
 @media screen and (max-width: 550px) {
 	.user-operations {
 		width: 80%;
+		margin-top: 5rem;
 		grid-template:
 			"info"
 			"fin-action";
@@ -80,7 +81,7 @@
 	}
 
 	.user-financial-info {
-		margin-bottom: 1rem;
+		margin-bottom: 2rem;
 	}
 
 	.user-financial-info p {
@@ -88,12 +89,20 @@
 	}
 
 	.user-deposit {
-		justify-content: flex-start;
+		display: block;
 	}
-}
 
-@media screen and (max-width: 375px) {
+	.user-deposit label {
+		margin-bottom: 1.5rem;
+	}
+
+	.user-deposit input {
+		width: 100%;
+		margin: 0;
+		margin-bottom: 1rem;
+	}
+
 	.user-deposit button {
-		font-size: 1.5rem;
+		width: 100%;
 	}
 }

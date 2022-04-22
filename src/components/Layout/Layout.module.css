@@ -28,7 +28,9 @@
 ::before {
 	margin: 0;
 	padding: 0;
+	border: 0;
 	box-sizing: border-box;
+	margin-block: 0;
 }
 
 /* css global */
@@ -73,10 +75,4 @@ button {
 .wrapper {
 	min-height: 100vh;
 	height: -webkit-fill-available;
-}
-
-@media screen and (max-width: 768px) {
-	.wrapper {
-		overflow-y: scroll;
-	}
 }
