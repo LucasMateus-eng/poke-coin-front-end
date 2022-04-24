@@ -11,7 +11,7 @@ const USER_STATEMENT_VALUE = "/balance";
 const USER_WALLET_VALUE = "/wallet/value";
 const USER_STATEMENT = "/statement";
 
-const FinWidget = (props) => {
+const FinWidget = ({ onChangeStatement }) => {
 	const [statementValue, setStatementValue] = useState(0);
 	const [walletValue, setWalletValue] = useState(0);
 	const [amount, setAmount] = useState("");
@@ -36,7 +36,7 @@ const FinWidget = (props) => {
 
 				console.log(statement);
 				setStatementValue(statement?.data);
-				props.onChangeStatement(statement?.data);
+				onChangeStatement(statement?.data);
 
 				console.log(walletValue);
 				setWalletValue(walletValue?.data);
@@ -52,7 +52,7 @@ const FinWidget = (props) => {
 		};
 
 		fetchFinancialData();
-	}, [statementValue, walletValue]);
+	}, [statementValue, walletValue, onChangeStatement]);
 
 	const handleSubmit = async (e) => {
 		const access_token = localStorage.getItem("token");

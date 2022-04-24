@@ -24,7 +24,7 @@ const History = () => {
 		return newDate.toLocaleDateString("pt-BR", options);
 	};
 
-	console.log(operations);
+	console.log(operations.slice(0).reverse());
 
 	const operationsDontExists = (
 		<>
@@ -58,27 +58,31 @@ const History = () => {
 			</div>
 			<div className={styles["history-content"]}>
 				{React.Children.toArray(
-					operations.map((item) => (
-						<div className={styles["history-card"]}>
-							<div className={styles["history-name"]}>
-								<p>{item.name}</p>
+					operations
+						.slice(0)
+						.reverse()
+						.map((item) => (
+							<div className={styles["history-card"]}>
+								<div className={styles["history-name"]}>
+									<p>{item.name}</p>
+								</div>
+								<div className={styles["history-state"]}>
+									<p>{item.state}</p>
+								</div>
+								<div className={styles["history-quantity"]}>
+									<p>Quantidade: {item.quantity}</p>
+								</div>
+								<div className={styles["history-total"]}>
+									<p>
+										Total:{" "}
+										{item.total === 0 ? item.total : item.total.toFixed(3)}
+									</p>
+								</div>
+								<div className={styles["history-date"]}>
+									<p>{dateFormat(item.created_at)}</p>
+								</div>
 							</div>
-							<div className={styles["history-state"]}>
-								<p>{item.state}</p>
-							</div>
-							<div className={styles["history-quantity"]}>
-								<p>Quantidade: {item.quantity}</p>
-							</div>
-							<div className={styles["history-total"]}>
-								<p>
-									Total: {item.total === 0 ? item.total : item.total.toFixed(3)}
-								</p>
-							</div>
-							<div className={styles["history-date"]}>
-								<p>{dateFormat(item.created_at)}</p>
-							</div>
-						</div>
-					))
+						))
 				)}
 			</div>
 		</>
